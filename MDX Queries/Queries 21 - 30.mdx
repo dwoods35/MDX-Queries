@@ -1,0 +1,103 @@
+
+--Query #21
+-- Error 2 - Repeating hierarchies
+select
+[Date].[Calendar].[Calendar Year]
+on columns,
+[Date].[Calendar].[Month]
+on rows
+from
+[Adventure Works]
+
+--Query #22
+--Each year and each month
+select
+[Measures].[Internet Sales Amount]
+on columns,
+non empty crossjoin ([Date].[Calendar].[Calendar Year], [Date].[Month of Year].[Month of Year])
+on rows
+from
+[Adventure Works]
+
+--Query #23
+-- hierarchy and level members
+select
+[Product].[Category].members
+on columns,
+[Geography].[Geography].[Country].members
+on rows
+from
+[Adventure Works]
+
+--Query #24
+--children
+select
+[Measures].[Internet Sales Amount]
+on columns,
+[Product].[Product Categories].[Category].[Bikes].children --firstchild, lastchild
+on rows
+from
+[Adventure Works]
+
+--Query #25
+--parent
+select
+[Measures].[Internet Sales Amount]
+on columns,
+[Product].[Product Categories].[Subcategory].[Road Bikes].parent 
+on rows
+from
+[Adventure Works]
+
+--Query #26
+--sibling
+select
+[Measures].[Internet Sales Amount]
+on columns,
+[Product].[Product Categories].[Category].[Bikes].siblings --firstsibling, lastsibling
+on rows
+from
+[Adventure Works]
+
+--Query #27
+--descendants
+select
+[Measures].[Internet Sales Amount]
+on columns,
+descendants([Customer].[Customer Geography].[Country].[France], [Customer].[Customer Geography].[City])
+on rows
+from
+[Adventure Works]
+
+--Query #28
+--ancestor
+select
+[Measures].[Internet Sales Amount]
+on columns,
+ancestor([Customer].[Customer Geography].[City].[Paris], [Customer].[Customer Geography].[Country])
+on rows
+from
+[Adventure Works]
+
+--Query #29
+--ascendants
+select
+[Measures].[Internet Sales Amount]
+on columns,
+ascendants([Customer].[Customer Geography].[Customer].[Adriana Smith])
+on rows
+from
+[Adventure Works]
+
+--Query #30
+--hierarchize
+select
+[Measures].[Internet Sales Amount]
+on columns,
+hierarchize(ascendants([Customer].[Customer Geography].[Customer].[Adriana Smith]))
+on rows
+from
+[Adventure Works]
+
+
+

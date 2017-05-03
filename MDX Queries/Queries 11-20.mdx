@@ -1,0 +1,79 @@
+--Query #11
+-- dimension.attribute hierarchy
+select
+[Product].[Category].[all] 
+on columns
+from
+[Adventure Works]
+
+--Query #12
+-- dimension.attribute hierarchy
+select
+[Product].[Category].[all products]
+on columns
+from
+[Adventure Works]
+
+--Query #13
+-- dimension.hierarchy.members
+select
+[Product].[Category].members
+on columns
+from
+[Adventure Works]
+
+--Query #14
+-- dimension.hierarchy.level.members
+select
+[Product].[Category].[Category].members
+on columns
+from
+[Adventure Works]
+
+--Query #15
+select
+{[Product].[Category].[Category].members,[Product].[Category].[All Products]}
+on columns
+from
+[Adventure Works]
+
+--Query #16
+--Query by name
+select
+[Product].[Category].[Bikes]
+on columns
+from
+[Adventure Works]
+
+--Query #17
+--Query by key
+select
+[Product].[Category].&[1]
+on columns
+from
+[Adventure Works]
+
+--Query #18
+--Set
+select
+{[Product].[Category].[Bikes],[Product].[Category].[Clothing]}
+on columns
+from
+[Adventure Works]
+
+--Query #19
+--User Hierarchy
+select
+[Product].[Product Categories].members
+on columns
+from
+[Adventure Works]
+
+--Query #20
+--Error 1 - Two hierarchies from same dimension
+select
+[Product].[Product Categories],[Product].[Category]
+on columns
+from
+[Adventure Works]
+

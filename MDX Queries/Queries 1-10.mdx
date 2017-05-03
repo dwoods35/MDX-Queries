@@ -1,0 +1,95 @@
+--Query #1
+SELECT
+FROM [Adventure Works]
+
+-- defaultmember
+select [Measures].defaultmember
+on columns
+from
+[Adventure Works]
+
+-- All measures in a measure group
+select MeasureGroupMeasures("Internet Sales") on columns
+from
+[Adventure Works]
+
+--Query #2
+--Explicit default measure
+select
+from
+[Adventure Works]
+where [Measures].[Reseller Sales Amount]
+
+--Query #3
+--Different measure
+select
+from
+[Adventure Works]
+where [Measures].[Internet Sales Amount]
+
+--Query #4
+--Measure on axis
+select 
+[Measures].[Internet Sales Amount]
+on columns
+from
+[Adventure Works]
+
+--Query #5
+--User hierarchy on axis
+select
+[Product].[Product Categories].[Category]
+on columns
+from
+[Adventure Works]
+
+--Query #6
+--Attribute hierarchy
+--Property - AttributeAllMemberName 
+select
+{[Product].[Product Categories].[Category],[Product].[Product Categories]}
+on columns
+from
+[Adventure Works]
+
+--Query #7
+--Two axis
+select
+{[Date].[Calendar].[Calendar Year],[Date].[Calendar]}
+on columns,
+[Product].[Product Categories].[Category]
+on rows
+from
+[Adventure Works]
+
+--Query #8
+--non empty
+select
+non empty {[Date].[Calendar].[Calendar Year],[Date].[Calendar]}
+on columns,
+{[Product].[Product Categories].[Category],[Product].[Product Categories]}
+on rows
+from
+[Adventure Works]
+
+--Query #9
+--Where clause
+select
+non empty {[Date].[Calendar].[Calendar Year],[Date].[Calendar]}
+on columns,
+{[Product].[Product Categories].[Category],[Product].[Product Categories]}
+on rows
+from
+[Adventure Works]
+where [Measures].[Internet Sales Amount]
+
+--Query #10
+--non empty on both axis
+select
+non empty {[Date].[Calendar].[Calendar Year],[Date].[Calendar]}
+on columns,
+non empty {[Product].[Product Categories].[Category],[Product].[Product Categories]}
+on rows
+from
+[Adventure Works]
+where [Measures].[Internet Sales Amount]
